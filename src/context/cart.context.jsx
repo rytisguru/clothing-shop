@@ -7,10 +7,24 @@ const addCartItem = (cartItems, productToAdd) => {
         return cartItems.map((item) =>
             item.id === productToAdd.id
                 ? { ...item, quantity: item.quantity + 1 }
-                : item 
+                : item
         )
     }
     return [...cartItems, { ...productToAdd, quantity: 1 }]
+}
+
+const deleteCartItem = (cartItems, productToDeleteId) => {
+    return cartItems.filter(item => item.id !== productToDeleteId)
+}
+
+const changeItemQuantity = (cartItems, productId, value) => {
+    return cartItems.map((item) =>
+        item.id === productId
+            ? item.quantity + (JSON.parse(value)) !== 0
+                ? { ...item, quantity: item.quantity + (JSON.parse(value)) }
+                : item
+            : item
+    )
 }
 
 export const CartContext = createContext({
@@ -18,7 +32,10 @@ export const CartContext = createContext({
     setIsCartOpen: () => { },
     cartItems: [],
     addItemToCart: () => { },
-    totalItems: 0
+    deleteItemFromCart: () => { },
+    changeCartItemQuantity: () => { },
+    totalItems: 0,
+    totalPrice: 0
 })
 
 export const CartProvider = ({ children }) => {
@@ -28,10 +45,29 @@ export const CartProvider = ({ children }) => {
     const addItemToCart = (productToAdd) => {
         setCartItems(addCartItem(cartItems, productToAdd))
     }
-    
+
+    const deleteItemFromCart = (productToDeleteId) => {
+        setCartItems(deleteCartItem(cartItems, productToDeleteId))
+    }
+
+    const changeCartItemQuantity = (productId, value) => {
+        setCartItems(changeItemQuantity(cartItems, productId, value))
+    }
+
     const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0)
 
-    const value = { isCartOpen, setIsCartOpen, addItemToCart, cartItems, totalItems }
+    const totalPrice = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0)
+
+    const value = {
+        isCartOpen,
+        setIsCartOpen,
+        addItemToCart,
+        deleteItemFromCart,
+        changeCartItemQuantity,
+        cartItems,
+        totalItems,
+        totalPrice
+    }
 
     return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }
