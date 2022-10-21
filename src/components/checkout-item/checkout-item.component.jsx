@@ -1,15 +1,15 @@
 import { useContext } from 'react';
-import { CartContext } from '../../context/cart.context';
+import { CartContext, CART_ACTIONS } from '../../context/cart.context';
 
 import './checkout-item.styles.scss';
 
 const CheckOutItem = ({ product }) => {
     const { id, imageUrl, name, quantity, price } = product
-    const { deleteItemFromCart, changeCartItemQuantity } = useContext(CartContext)
+    const { dispatch } = useContext(CartContext)
 
-    const deleteProduct = () => deleteItemFromCart(id)
-    const increase = () => changeCartItemQuantity(id, "1")
-    const decrease = () => changeCartItemQuantity(id, "-1")
+    const deleteProduct = () => dispatch({ type: CART_ACTIONS.DELETE_ITEM_FROM_CART, payload: { id: id } })
+    const increase = () => dispatch({ type: CART_ACTIONS.CHANGE_CART_ITEM_QUANTITY, payload: { id: id, value: "1" } })
+    const decrease = () => dispatch({ type: CART_ACTIONS.CHANGE_CART_ITEM_QUANTITY, payload: { id: id, value: "-1" } })
 
     return (
         <div className="checkout-item-container">
