@@ -25,7 +25,7 @@ const SignInForm = () => {
         e.preventDefault();
 
         try {
-            const { user } = await signInAuthUserWithEmailAndPassword(email, password)
+            await signInAuthUserWithEmailAndPassword(email, password)
             setFormFields(defaultFormFields)
         } catch (error) {
             if (error.code === 'auth/wrong-password'
