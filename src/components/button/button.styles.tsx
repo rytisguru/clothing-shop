@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { SpinnerContainer } from '../spinner/spinner.styles';
+import { responsive } from '../../design/mixins';
 
 export const BaseButton = styled.button`
   display: flex;
@@ -19,6 +20,11 @@ export const BaseButton = styled.button`
   cursor: pointer;
   justify-content: center;
   align-items: center;
+
+  ${responsive.forPhone`
+    font-size: 12px;
+    padding: 0 15px 0 15px;
+  `}
 
   &:hover {
     background-color: white;

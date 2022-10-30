@@ -1,3 +1,7 @@
+import { createGlobalStyle } from 'styled-components';
+import { responsive } from './design/mixins';
+
+export const GlobalStyle = createGlobalStyle`
 /* latin */
 @font-face {
   font-family: 'Lobster Two';
@@ -23,6 +27,10 @@ body {
   font-family: 'Lobster Two', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+    ${responsive.forPhone`
+        padding: 10px;
+    `};
 }
 
 code {
@@ -38,3 +46,4 @@ a {
 * {
   box-sizing: border-box;
 }
+`;

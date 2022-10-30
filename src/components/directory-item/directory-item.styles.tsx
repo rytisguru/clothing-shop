@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { responsive } from '../../design/mixins';
 
 const LargeItem = css`
     height: 380px;
@@ -76,4 +77,9 @@ export const DirectoryItemContainer = styled.div<DirectoryItemProps>`
     &:last-child {
         margin-left: 7.5px;
     }
+
+    ${responsive.forPhone`
+        min-width: 50%;
+        height: 200px;
+    `}
 `;

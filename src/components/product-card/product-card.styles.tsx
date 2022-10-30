@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { responsive } from '../../design/mixins';
 
 export const ProductCardContainer = styled.div`
   width: 100%;
@@ -7,6 +8,10 @@ export const ProductCardContainer = styled.div`
   height: 350px;
   align-items: center;
   position: relative;
+
+  ${responsive.forTabletPortrait`
+    margin-bottom: 25px;
+  `}
   
   img {
     width: 100%;
@@ -21,6 +26,10 @@ export const ProductCardContainer = styled.div`
     position: absolute;
     top: 255px;
     display: none;
+
+    ${responsive.forTabletLandscape`
+      font-size: 12px;
+    `}
   }
   
   &:hover {

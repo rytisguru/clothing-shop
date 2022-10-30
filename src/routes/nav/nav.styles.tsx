@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { responsive } from '../../design/mixins';
 
 export const Navigation = styled.div`
   height: 70px;
@@ -21,6 +22,11 @@ export const NavLinksContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  margin: 20px 0;
+
+  ${responsive.forPhone`
+    width: 70%;
+  `}
 `;
 
 export const NavLink = styled(Link)`

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { responsive } from '../../design/mixins';
 
 export const CheckOutContainer = styled.div`
   width: 55%;
@@ -7,6 +8,14 @@ export const CheckOutContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 50px auto 0;
+
+  ${responsive.forTabletPortrait`
+    width: 75%;
+  `}
+
+  ${responsive.forPhone`
+    width: 90%;
+  `}
 `;
 
 export const CheckOutHeader = styled.div`

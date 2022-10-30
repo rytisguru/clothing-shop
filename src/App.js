@@ -4,12 +4,14 @@ import { useDispatch } from 'react-redux';
 
 import { checkUserSession } from "./store/user/user.action";
 import Spinner from "./components/spinner/spiner.component";
+import { GlobalStyle } from './global.styles';
 
 const Directory = lazy(() => import('./components/directory/directory.component'));
 const Authentication = lazy(() => import('./routes/authentication/authentication.component'));
 const CheckOut = lazy(() => import('./routes/checkout/checkout.component'));
 const Nav = lazy(() => import('./routes/nav/nav.component'));
 const Shop = lazy(() => import('./routes/shop/shop.component'));
+
 
 const App = () => {
   const dispatch = useDispatch()
@@ -19,16 +21,19 @@ const App = () => {
   }, [])
 
   return (
-    <Suspense fallback={<Spinner />}>
-      <Routes>
-        <Route path="/" element={<Nav />}>
-          <Route index element={<Directory />} />
-          <Route path="shop/*" element={<Shop />} />
-          <Route path="auth" element={<Authentication />} />
-          <Route path="checkout" element={<CheckOut />} />
-        </Route>
-      </Routes>
-    </Suspense>
+    <>
+      <GlobalStyle />
+      <Suspense fallback={<Spinner />}>
+        <Routes>
+          <Route path="/" element={<Nav />}>
+            <Route index element={<Directory />} />
+            <Route path="shop/*" element={<Shop />} />
+            <Route path="auth" element={<Authentication />} />
+            <Route path="checkout" element={<CheckOut />} />
+          </Route>
+        </Routes>
+      </Suspense>
+    </>
   );
 }
 
